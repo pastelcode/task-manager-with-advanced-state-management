@@ -1,3 +1,4 @@
+import { categories } from '@/lib/constants'
 import TaskCategory from '@/models/TaskCategory'
 import {
   Select,
@@ -6,13 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
-
-const categories: TaskCategory[] = [
-  { value: 'home', label: 'Home' },
-  { value: 'personal', label: 'Personal' },
-  { value: 'university', label: 'University' },
-  { value: 'love', label: 'Love' },
-]
 
 const TaskCategoriesSelect = ({
   value,
@@ -30,7 +24,7 @@ const TaskCategoriesSelect = ({
         )
       }
     >
-      <SelectTrigger id="category">
+      <SelectTrigger>
         <SelectValue placeholder="Select" />
       </SelectTrigger>
       <SelectContent position="popper">
