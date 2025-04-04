@@ -1,7 +1,19 @@
 import Task from '@/models/Task'
 import TaskCategory from '@/models/TaskCategory'
 import { Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
 import TaskCategoriesSelect from './TaskCategoriesSelect'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog'
 import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 import { Checkbox } from './ui/checkbox'
@@ -9,14 +21,12 @@ import { Input } from './ui/input'
 import { Label } from './ui/label'
 
 const TaskRow = ({
-  number,
   task,
   onTitleChanged,
   onCategoryChanged,
   onCompletedChanged,
   onDeleted,
 }: {
-  number: number
   task: Task
   onTitleChanged: (value: string) => void
   onCategoryChanged: (value: TaskCategory) => void
@@ -33,31 +43,55 @@ const TaskRow = ({
               onCheckedChange={onCompletedChanged}
             />
           </div>
-          <div className="flex flex-row justify-between w-full">
-            <div className="flex flex-col">
-              <div className="flex gap-3 items-center">
-                <Label> Title </Label>
-                <Input
-                  value={task.title}
-                  onChange={(event) => onTitleChanged(event.target.value)}
-                />
-              </div>
-              <div className="h-3" />
-              <div className="flex gap-3">
-                <Label>Category</Label>
-                <TaskCategoriesSelect
-                  value={task.category}
-                  onChanged={onCategoryChanged}
-                />
-              </div>
+          <div className="flex flex-col w-full">
+            <div className="flex gap-3 items-center ">
+              <Label>Title</Label>
+              <Input
+                value={task.title}
+                onChange={(event) => onTitleChanged(event.target.value)}
+              />
             </div>
-            <div className="flex flex-row">
-              <Button variant="ghost" onClick={onDeleted}>
-                <Trash2 />
-                Delete
-              </Button>
+            <div className="h-3" />
+            <div className="flex gap-3">
+              <Label>Category</Label>
+              <TaskCategoriesSelect
+                value={task.category}
+                onChanged={onCategoryChanged}
+              />
             </div>
           </div>
+          <div className="flex flex-row">
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost">
+                  <Trash2 />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete task?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action can't be undone
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction asChild>
+                    <Button
+                      variant="destructive"
+                      onClick={() => {
+                        onDeleted()
+                        toast.success('Task deleted')
+                      }}
+                    >
+                      Yes, delete
+                    </Button>
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>{' '}
         </div>
       </CardContent>
     </Card>

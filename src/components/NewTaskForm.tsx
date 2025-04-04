@@ -30,7 +30,6 @@ const NewTaskForm = ({
     if (title.trim().length < 1 || category === undefined) {
       toast.error('Oops!', {
         description: 'Please fill the title and select a category for the task',
-        action: { label: 'Dismiss', onClick: () => {} },
       })
       return false
     }
@@ -48,13 +47,13 @@ const NewTaskForm = ({
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className="hover:no-underline">
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <h3 className="font-medium text-lg">Add new task</h3>
-                <p>Plan your day</p>
+                <p className="text-sm text-muted-foreground">Plan your day</p>
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="grid w-full items-center gap-4 px-2">
+              <div className="grid w-full items-center gap-5 px-1 mt-2">
                 <div className="flex flex-col space-y-2">
                   <Label htmlFor="title">Title</Label>
                   <Input

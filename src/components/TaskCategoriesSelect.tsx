@@ -35,7 +35,9 @@ const TaskCategoriesSelect = ({
       </SelectTrigger>
       <SelectContent position="popper">
         {categories.map((category) => (
-          <SelectItem value={category.value}>{category.label}</SelectItem>
+          <SelectItem key={category.value} value={category.value}>
+            {category.label}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>

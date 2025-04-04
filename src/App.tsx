@@ -14,7 +14,7 @@ function App() {
     ])
 
   const deleteTask = (taskIndex: number) =>
-    setTasks(tasks.filter((task, index) => index !== taskIndex))
+    setTasks(tasks.filter((_, index) => index !== taskIndex))
 
   const copyTaskWith = (
     title: string | undefined,
@@ -37,12 +37,12 @@ function App() {
 
   return (
     <div className="w-lg mx-auto mt-10 font-[Manrope]">
-      <h1 className="mb-5 font-black text-5xl tracking-tight text-left">
+      <h1 className="mb-8 font-black text-5xl tracking-tight text-left">
         Daily Tasks
       </h1>
       <NewTaskForm onAdd={addTask} />
       {tasks.length !== 0 && (
-        <p className="text-right pt-5 pb-3 text-sm text-gray-500">
+        <p className="text-right pt-5 pb-3 text-sm text-muted-foreground">
           {`${tasks.filter((task) => task.isCompleted).length}/${
             tasks.length
           } completed`}
@@ -51,8 +51,7 @@ function App() {
       {tasks.map((task, index) => (
         <div className="mb-5">
           <TaskRow
-            key={`${task.title}${task.category.value}${index}`}
-            number={index + 1}
+            key={index}
             task={task}
             onTitleChanged={(newTitle) =>
               copyTaskWith(newTitle, undefined, undefined, index)
