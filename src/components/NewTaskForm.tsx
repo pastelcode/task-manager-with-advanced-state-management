@@ -49,7 +49,7 @@ const NewTaskForm = ({
           <AccordionItem value="item-1">
             <AccordionTrigger className="hover:no-underline">
               <div className="flex flex-col">
-                <h3 className="font-bold text-lg">Add new task</h3>
+                <h3 className="font-medium text-lg">Add new task</h3>
                 <p>Plan your day</p>
               </div>
             </AccordionTrigger>
